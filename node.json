@@ -1,0 +1,36 @@
+{
+    "node1":{
+	"name" : "read_01",
+	"type" : "read",
+	"file" : "in.jpg",
+	"id": 1
+	},
+    "node2":{
+	"name" : "blur_01",
+	"type" : "blur",
+	"link" : "read_01",
+	"size" : 10,
+	"id": 2
+	},
+    "node3":{
+	"name" : "size_01",
+	"type" : "size",
+	"link" : "blur_01",
+	"size" : -1.2,
+	"id": 3
+	},
+    "node4":{
+	"name" : "sharpen_01",
+	"type" : "sharpen",
+	"link" : "size_01",
+	"size" : 3,
+	"id": 4
+	},
+    "node5":{
+	"name" : "write_01",
+	"type" : "write",
+	"link" : "sharpen_01",
+	"file" : "test2.jpg",
+	"id": 5
+	}
+}

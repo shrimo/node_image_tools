@@ -1,0 +1,44 @@
+{
+    "node1":{
+	"name" : "read_01",
+	"type" : "read",
+	"file" : "comp_a.png",
+	"id": 1
+	},
+    "node2":{
+	"name" : "read_02",
+	"type" : "read",
+	"file" : "env.jpg",
+	"id": 2
+	},
+    "node3":{
+	"name" : "composite_01",
+	"type" : "composite",
+	"link_a" : "read_01",
+	"link_b" : "read_02",
+	"job" : "plus",
+	"id": 3
+	},
+    "node4":{
+	"name" : "size_01",
+	"type" : "size",
+	"link" : "composite_01",
+	"size" : 1.2,
+	"id": 4
+	},
+    "node5":{
+	"name" : "color_correct_01",
+	"type" : "cc",
+	"link" : "read_02",
+	"bright" : 1.2,
+	"contrast":2,
+	"id": 5
+	},
+    "node6":{
+	"name" : "write_01",
+	"type" : "write",
+	"link" : "color_correct_01",
+	"file" : "out.png",
+	"id": 6
+	}
+}
