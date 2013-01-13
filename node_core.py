@@ -1,4 +1,4 @@
-import json
+import json, sys
 from node_lib import *
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import numpy
@@ -7,7 +7,7 @@ from scipy import misc
 print 'Node image tools (core) v01a'
 
 # Read node file *.json
-file_node='composite.json'
+file_node=sys.argv[1] #'composite.json'
 with open(file_node) as jdf:
     data_io = json.load(jdf)
 

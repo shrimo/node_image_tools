@@ -2,7 +2,7 @@
     "node1":{
 	"name" : "read_01",
 	"type" : "read",
-	"file" : "in.jpg",
+	"file" : "env.jpg",
 	"id": 1
 	},
     "node2":{
