@@ -7,7 +7,7 @@ from scipy import misc
 print 'Node image tools (core) v01a'
 
 # Read node file *.json
-file_node=sys.argv[1] #file read 'composite.json'
+file_node=sys.argv[1] #read 'composite.json'
 with open(file_node) as jdf:
     data_io = json.load(jdf)
 
