@@ -57,7 +57,7 @@ def blur_(cached,size):
     for k in range(size):
         out=misc.imfilter(out,'blur')
         print '.',
-    print '->Blur'
+    print '->Blur',size
     return out;
 
 # node sharpen
@@ -66,7 +66,7 @@ def sharpen_(cached,size):
     for k in range(size):
         out=misc.imfilter(out,'sharpen')
         print '.',
-    print '->Sharpen'
+    print '->Sharpen',size
     return out;
 
 # node gradient

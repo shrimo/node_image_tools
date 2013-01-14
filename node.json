@@ -9,7 +9,7 @@
 	"name" : "blur_01",
 	"type" : "blur",
 	"link" : "read_01",
-	"size" : 10,
+	"size" : 8,
 	"id": 2
 	},
     "node3":{
@@ -23,7 +23,7 @@
 	"name" : "sharpen_01",
 	"type" : "sharpen",
 	"link" : "size_01",
-	"size" : 3,
+	"size" : 4,
 	"id": 4
 	},
     "node5":{
@@ -32,5 +32,11 @@
 	"link" : "sharpen_01",
 	"file" : "test2.jpg",
 	"id": 5
+	},
+    "node6":{
+	"name" : "view_01",
+	"type" : "view",
+	"link" : "sharpen_01",
+	"id": 6
 	}
 }

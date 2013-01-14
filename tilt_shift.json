@@ -9,7 +9,7 @@
 	"name" : "blur_01",
 	"type" : "blur",
 	"link" : "read_01",
-	"size" : 10,
+	"size" : 16,
 	"id": 2
 	},
     "node3":{
@@ -42,5 +42,11 @@
 	"link" : "color_correct_01",
 	"file" : "tilt_shift.jpg",
 	"id": 6
+	},
+    "node7":{
+	"name" : "view_01",
+	"type" : "view",
+	"link" : "color_correct_01",
+	"id": 7
 	}
 }

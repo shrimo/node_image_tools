@@ -52,6 +52,10 @@ for _name in sorted_names:
     if (node.type=='sharpen'):
         cached[node.name]=sharpen_(cached[node.link],node.size)
 
+    if (node.type=='view'):
+        view_img = Image.fromarray(cached[node.link])
+        view_img.show()
+
     if (node.type=='write'):
         out_img = Image.fromarray(cached[node.link])
         out_img.save(node.file)

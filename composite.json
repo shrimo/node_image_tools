@@ -40,5 +40,11 @@
 	"link" : "color_correct_01",
 	"file" : "out.png",
 	"id": 6
+	},
+    "node7":{
+	"name" : "view_01",
+	"type" : "view",
+	"link" : "color_correct_01",
+	"id": 7
 	}
 }
