@@ -7,7 +7,7 @@ from scipy import misc
 print 'Node image tools (core) v01a'
 
 # Read node file *.json
-file_node=sys.argv[1] #read 'composite.json'
+file_node=sys.argv[1]
 with open(file_node) as jdf:
     data_io = json.load(jdf)
 
@@ -35,8 +35,16 @@ for _name in sorted_names:
     if (node.type=='rotate'):
         cached[node.name]=rotate_(cached[node.link],node.angle)
 
+    if (node.type=='gradient'):
+        cached[node.name]=gradient_(node.width,node.height)
+
     if (node.type=='composite'):
-        cached[node.name]=composite_(cached[node.link_a],cached[node.link_b],node.job)
+        if(node.job!='mask'):
+            cached[node.name]=composite_(cached[node.link_a],cached[node.link_b],
+            0,node.job)
+        if(node.job=='mask'):
+            cached[node.name]=composite_(cached[node.link_a],cached[node.link_b],
+            cached[node.mask],node.job)
 
     if (node.type=='blur'):
         cached[node.name]=blur_(cached[node.link],node.size)
