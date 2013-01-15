@@ -4,10 +4,15 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import numpy
 from scipy import misc
 
-print 'Node image tools (core) v01a'
+print '\nNode image tools (core) v01a\n'
 
 # Read node file *.json
-file_node=sys.argv[1]
+try:
+    file_node=sys.argv[1]
+except:
+    print '->Error. No script'
+    sys.exit (0)
+    
 with open(file_node) as jdf:
     data_io = json.load(jdf)
 
@@ -21,7 +26,11 @@ for _name in sorted_names:
     node = G(data_io[_name]) #list[properties] to node.properties
 
     if (node.type=='read'):
-        img = Image.open(node.file)
+        try:
+            img = Image.open(node.file)
+        except:
+            print '->Error. No such file', node.file
+            sys.exit (0)        
         width, height = img.size
         cached[node.name] = numpy.array(img)
         print 'cached->', node.file,'(',width, height,')'
@@ -60,3 +69,5 @@ for _name in sorted_names:
         out_img = Image.fromarray(cached[node.link])
         out_img.save(node.file)
         print 'write->', node.file
+
+print '\nScript:',file_node,'completed'
