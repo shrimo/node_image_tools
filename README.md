@@ -20,7 +20,7 @@ matplotlib: http://matplotlib.org/
 
 ![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_1.png)
 
-![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_1.png)
+![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_2.png)
 
 ![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_3.png)
 
