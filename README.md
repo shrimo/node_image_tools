@@ -10,7 +10,19 @@ PIL, the Python Image Library: http://www.pythonware.com/products/pil/
 
 Numpy/Scipy: http://www.numpy.org/
 
+NetworkX: http://networkx.github.com/
+
+matplotlib: http://matplotlib.org/
+
     execute application: node_core.py *.json
+
+    graph visualization: node_graph.py *.json
+
+![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_1.png)
+
+![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_1.png)
+
+![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_3.png)
 
 More detailed documentation:
 
