@@ -1,3 +1,6 @@
+# Node image tools (core)
+# Copyright 2013 Victor Lavrentev
+
 import json, sys
 from node_lib import *
 from PIL import Image, ImageDraw, ImageFilter, ImageFont

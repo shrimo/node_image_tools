@@ -14,9 +14,9 @@ NetworkX: http://networkx.github.com/
 
 matplotlib: http://matplotlib.org/
 
-    execute application: node_core.py *.json
+    execute scripts : node_core.py *.json
 
-    graph visualization: node_graph.py *.json
+    render graph : node_graph.py *.json
 
 ![Screen shot 1](/shrimo/node_image_tools/raw/master/docs/figure_1.png)
 
