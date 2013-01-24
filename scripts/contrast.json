@@ -57,10 +57,10 @@
 	"file" : "mask.png",
 	"id": 8
 	},
-    "node8":{
+    "node9":{
 	"name" : "view_01",
 	"type" : "view",
 	"link" : "sharpen_01",
-	"id": 8
+	"id": 9
 	}
 }

@@ -1,0 +1,35 @@
+{
+    "node1":{
+	"name" : "read_01",
+	"type" : "read",
+	"file" : "comp_a.png",
+	"id": 1
+	},
+    "node2":{
+	"name" : "read_02",
+	"type" : "read",
+	"file" : "alpha.png",
+	"id": 2
+	},
+    "node3":{
+	"name" : "composite_01",
+	"type" : "composite",
+	"link_a" : "read_02",
+	"link_b" : "read_01",
+	"job" : "over",
+	"id": 3
+	},
+    "node4":{
+	"name" : "write_01",
+	"type" : "write",
+	"link" : "composite_01",
+	"file" : "out.png",
+	"id": 4
+	},
+    "node5":{
+	"name" : "view_01",
+	"type" : "view",
+	"link" : "composite_01",
+	"id": 5
+	}
+}

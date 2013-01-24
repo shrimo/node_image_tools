@@ -21,6 +21,16 @@ def composite_(cached_a,cached_b,mask,job):
         out=cached_a-cached_b
     if (job=='multiply'):
         out=cached_a*cached_b
+    if (job=='over'):
+        aCom = Image.fromarray(cached_a)
+        bCom = Image.fromarray(cached_b)
+        try:
+            alphaData = aCom.tostring("raw", "A")
+            alpha = Image.fromstring("L", aCom.size, alphaData)
+        except:
+            print '->Error. No alpha data. Alpha=Constant(130)'
+            alpha = Image.new("L", aCom.size,130)  
+        out = numpy.array(Image.composite(aCom, bCom, alpha))
     print '->Composite',job
     return out;
 
@@ -88,11 +98,10 @@ def gradient_(width,height):
 
 # node invert
 def invert_ (cached):
-    from PIL import ImageOps
-    out = numpy.array(ImageOps.invert(Image.fromarray(cached)))
+    from PIL import ImageChops
+    out = numpy.array(ImageChops.invert(Image.fromarray(cached)))
     print '->Invert'
     return out;
-    
     
     
 

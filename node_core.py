@@ -3,7 +3,7 @@
 
 import json, sys
 from node_lib import *
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter
 import numpy
 from scipy import misc
 
