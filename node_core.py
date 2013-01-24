@@ -60,6 +60,9 @@ for _name in sorted_names:
 
     if (node.type=='blur'):
         cached[node.name]=blur_(cached[node.link],node.size)
+        
+    if (node.type=='invert'):
+        cached[node.name]=invert_(cached[node.link])
 
     if (node.type=='sharpen'):
         cached[node.name]=sharpen_(cached[node.link],node.size)

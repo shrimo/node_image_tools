@@ -53,21 +53,24 @@ def rotate_(cached,angle):
 
 # node blur
 def blur_(cached,size):
-    out=cached
-    for k in range(size):
-        out=misc.imfilter(out,'blur')
-        print '.',
+    from scipy import ndimage
+    r = cached[:, :, 0]
+    g = cached[:, :, 1]
+    b = cached[:, :, 2]
+    r = ndimage.gaussian_filter(r,order=0, sigma=size)
+    g = ndimage.gaussian_filter(g,order=0, sigma=size)
+    b = ndimage.gaussian_filter(b,order=0, sigma=size)
+    cached=numpy.dstack((r, g, b))
     print '->Blur',size
-    return out;
+    return cached;
 
 # node sharpen
 def sharpen_(cached,size):
-    out=cached
     for k in range(size):
-        out=misc.imfilter(out,'sharpen')
+        cached=misc.imfilter(cached,'sharpen')
         print '.',
     print '->Sharpen',size
-    return out;
+    return cached;
 
 # node gradient
 def gradient_(width,height):
@@ -82,4 +85,15 @@ def gradient_(width,height):
     del draw
     print '->Gradient: width=',width,' height=',height
     return out;
+
+# node invert
+def invert_ (cached):
+    from PIL import ImageOps
+    out = numpy.array(ImageOps.invert(Image.fromarray(cached)))
+    print '->Invert'
+    return out;
+    
+    
+    
+
 

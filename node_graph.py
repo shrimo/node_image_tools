@@ -68,6 +68,10 @@ for _name in sorted_names:
         Node_graph.add_node(node.name)
         Node_graph.add_edge(node.link,node.name)
 
+    if (node.type=='invert'):
+        Node_graph.add_node(node.name)
+        Node_graph.add_edge(node.link,node.name)        
+
 pos=nx.spring_layout(Node_graph,iterations=30,weight=50,scale=1)
 # Draw graph
 for _graph in sorted_names:
@@ -84,7 +88,7 @@ for _graph in sorted_names:
     if (graph_.type=='composite'):
         nx.draw_networkx_nodes(Node_graph,pos,node_size=5000,alpha=0.5,
                                node_color='y',nodelist=[graph_.name])
-    if (graph_.type=='cc'):
+    if (graph_.type=='cc' or graph_.type=='invert'):
         nx.draw_networkx_nodes(Node_graph,pos,node_size=2000,alpha=0.5,
                                node_color='b',nodelist=[graph_.name])
     if (graph_.type=='rotate' or graph_.type=='size'):

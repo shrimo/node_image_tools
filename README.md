@@ -2,7 +2,7 @@
 
 Image processing on instructions from data (node) file.
 
-    Implemented: Read, Write, Blur, Sharpen,Color Correct, Size, Rotate, Composite, View
+    Implemented: Read, Write, Blur, Sharpen, Color Correct, Invert, Size, Rotate, Composite, View
 
 Used: Python 2.7
 
