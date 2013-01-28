@@ -5,7 +5,6 @@ import json, sys
 from node_lib import *
 from PIL import Image, ImageDraw, ImageFilter
 import numpy
-from scipy import misc
 
 print '\nNode image tools (core) v01a\n'
 

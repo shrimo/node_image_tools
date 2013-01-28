@@ -1,4 +1,7 @@
-from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
+import Image
+import ImageDraw
+import ImageFilter
+import ImageEnhance
 import numpy
 from scipy import misc
 
