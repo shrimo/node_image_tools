@@ -11,6 +11,17 @@ class graph(dict):
         super(graph, self).__init__(*args, **kwds)
         self.__dict__ = self
 
+#add float data
+def imagePlus (imageA,imageB):
+
+    imageA = imageA.astype(float)
+    imageB = imageB.astype(float)
+
+    imageC = (imageA+imageB)/2 
+    imageC = imageC.astype('uint8')
+    
+    return imageC
+
 # node composite
 def composite_(cached_a,cached_b,mask,job):
     if (job=='mask'):
@@ -19,7 +30,7 @@ def composite_(cached_a,cached_b,mask,job):
         iMask = Image.fromarray(mask)
         out = numpy.array(Image.composite(aCom, bCom, iMask))
     if (job=='plus'):
-        out=cached_a+cached_b
+        out=imagePlus(cached_a,cached_b)
     if (job=='minus'):
         out=cached_a-cached_b
     if (job=='multiply'):
