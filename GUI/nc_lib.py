@@ -11,17 +11,6 @@ from PIL import Image, ImageQt, ImageChops
 from scipy import misc
 import numpy
 
-#add float data
-def imagePlus (imageA,imageB):
-
-    imageA = imageA.astype(float)
-    imageB = imageB.astype(float)
-
-    imageC = (imageA+imageB)/2
-    imageC = imageC.astype('uint8')
-    
-    return imageC
-
 class ViewNode(ENodeHandle):
 
     def __init__(self, name):
