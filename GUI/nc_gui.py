@@ -11,72 +11,59 @@ from edd.core.enodehandle import ENodeHandle
 from PIL import Image, ImageQt
 from nc_lib import *
 import numpy
-
+        
 class ExampleScene(EScene):
 
     def __init__(self, view):
         EScene.__init__(self, view)
         self.__control = None
+        self.__nodes = {'Blur': BlurNode, 'Size': SizeNode, 'Read': ReadNode, 'Read2': ReadNode2, 'Composite': CompositeNode, 'ColorSpace': ColorSpaceNode, 'Constant': ConstantNode}        
         return
+
+    def getNode(self, name):
+
+        if self.__nodes.has_key(name):
+            return self.__nodes[name](name)    
+
+        return None
 
     def contextMenuEvent(self, event):
         menu = QMenu()
         
-        blur = menu.addAction('Blur')
-        size = menu.addAction('Size')
-        
-        read = menu.addAction('Read')
-        read2 = menu.addAction('Read2')
+        for name in self.__nodes.iterkeys():
+            menu.addAction(name)
 
-        composite = menu.addAction('Composite')
-        
         view = menu.addAction('View')
-        colorSpace = menu.addAction('ColorSpace')
         write = menu.addAction('Write')
-
         quit1 = menu.addAction('Quit')
+        ReLoad = menu.addAction('Reload')
         
         action = menu.exec_(QCursor.pos())
+
+        if action == ReLoad:
+            #reload(nc_lib)
+            print 'Reload'
+
         if action == quit1:
             print 'Quit'
             sys.exit(app.exec_())
-        if action == blur:
-            blurNode = BlurNode("Blur")
-            self.cwd().addNode(blurNode)
-            print 'add Blur'
-        if action == size:
-            sizeNode = SizeNode("Size")
-            self.cwd().addNode(sizeNode)
-            print 'add Size'
-        if action == read:
-            readNode = ReadNode("Read")
-            self.cwd().addNode(readNode)
-            print 'add Read'
 
-        if action == read2:
-            readNode2 = ReadNode2("Read2")
-            self.cwd().addNode(readNode2)
-            print 'add Read2'
-            
         if action == view:
             viewNode = ViewNode("Viewer")
             self.cwd().addNode(viewNode)
             viewNode.setControl(self.__control)
             print 'add View'
-        if action == composite:
-            compositeNode = CompositeNode("Composite")
-            self.cwd().addNode(compositeNode)
-            print 'add Composite'
-        if action == colorSpace:
-            colorSpaceNode = ColorSpaceNode("ColorSpace")
-            self.cwd().addNode(colorSpaceNode)
-            print 'add Math'
 
         if action == write:
             writeNode = WriteNode("Write")
             self.cwd().addNode(writeNode)
             writeNode.setControl(self.__control)
             print 'add Write'
+        
+        node = self.getNode(str(action.text()))
+
+        if node:
+            self.cwd().addNode(node)
 
 
     def setControl(self, control):

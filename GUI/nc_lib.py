@@ -27,9 +27,16 @@ class ViewNode(ENodeHandle):
 
     def compute(self):
 
-        img32bit= self.__inputAttr.Data
-        img8bit = img32bit.astype('uint8')
-        im = Image.fromarray(img8bit)
+        display_min = 0
+        display_max = 255
+        image_data = self.__inputAttr.Data
+        threshold_image = ((image_data.astype(float) - display_min) *
+                           (image_data > display_min))
+        scaled_image = (threshold_image * (255. / (display_max - display_min)))
+        scaled_image[scaled_image > 255] = 255
+        scaled_image = scaled_image.astype(numpy.uint8)
+        
+        im = Image.fromarray(scaled_image)
         RGBdata = None or im.convert("RGBA").tostring("raw", "BGRA")
 
         image = QImage(RGBdata, im.size[0], im.size[1], QImage.Format_ARGB32)
@@ -55,10 +62,31 @@ class WriteNode(ENodeHandle):
 
     def compute(self):
         
-        self.__inputAttr.Data.astype('uint8')
-        im = Image.fromarray(self.__inputAttr.Data)
+        img32bit= self.__inputAttr.Data
+        img8bit = img32bit.astype('uint8')
+        im = Image.fromarray(img8bit)
         im.save('out.jpg')
 
+        print "%s Computed" % self.Name
+
+class ConstantNode(ENodeHandle):
+
+    def __init__(self, name):
+        ENodeHandle.__init__(self, name)
+
+        self.__width = self.addProperty("width", 427)
+        self.__height = self.addProperty("height", 240)
+        self.__color = self.addProperty("color", (255,100,100))
+        
+        self.__outputAttr = self.addOutputAttribute("Output")
+
+    def compute(self):
+        
+        im = Image.new("RGB", (self.__width.Data, self.__height.Data),self.__color.Data)
+        imageFloat = numpy.array(im)
+        imageFloat = imageFloat.astype(float)
+        self.__outputAttr.Data = imageFloat
+        
         print "%s Computed" % self.Name
 
 class ReadNode(ENodeHandle):
@@ -98,7 +126,7 @@ class BlurNode(ENodeHandle):
         ENodeHandle.__init__(self, name)
 
         #self.__size = 5
-        self.__size = self.addProperty("Size", 10)
+        self.__size = self.addProperty("Size", 5)
         self.__inputAttr = self.addInputAttribute("Input")
         self.__outputAttr = self.addOutputAttribute("Output")
 
@@ -125,6 +153,7 @@ class BlurNode(ENodeHandle):
 class SizeNode(ENodeHandle):
 
     def __init__(self, name):
+        
         ENodeHandle.__init__(self, name)
         self.__size = 1.2
         self.__inputAttr = self.addInputAttribute("Input")
@@ -132,16 +161,20 @@ class SizeNode(ENodeHandle):
 
     def compute(self):
 
-        if self.__inputAttr.Data is None:
-            return
-        img = Image.fromarray(self.__inputAttr.Data)
-        w, h = img.size
+        img32bit= self.__inputAttr.Data
+        img8bit = img32bit.astype('uint8')
+        im = Image.fromarray(img8bit)
+        
+        w, h = im.size
         if (self.__size>0):
             S= int(round(h*self.__size)), int(round(w*self.__size))
-            self.__outputAttr.Data=misc.imresize(self.__inputAttr.Data,S,'bilinear','RGB')
+            resize=misc.imresize(img8bit,S,'bilinear','RGB')
         if (self.__size<0):
             S= int(round(h/abs(self.__size))),int(round(w/abs(self.__size)))
-            self.__outputAttr.Data=misc.imresize(self.__inputAttr.Data,S,'bilinear','RGB')
+            resize=misc.imresize(img8bit,S,'bilinear','RGB')
+
+        resize = resize.astype(float)
+        self.__outputAttr.Data = resize
 
         print "%s Computed" % self.Name
 
@@ -160,13 +193,13 @@ class ColorSpaceNode(ENodeHandle):
 
     def __init__(self, name):
         ENodeHandle.__init__(self, name)
-        self.__inputAttrA = self.addInputAttribute("InputA")
+        self.__inputAttr = self.addInputAttribute("InputA")
         self.__outputAttr = self.addOutputAttribute("Output")
 
     def compute(self):
         display_min = 0
         display_max = 255
-        image_data = self.__inputAttrA.Data
+        image_data = self.__inputAttr.Data
         threshold_image = ((image_data.astype(float) - display_min) *
                            (image_data > display_min))
         scaled_image = (threshold_image * (255. / (display_max - display_min)))
