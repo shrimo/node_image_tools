@@ -1,5 +1,4 @@
 # Node image tools (core)
-# Copyright 2013 Victor Lavrentev
 
 import json, sys
 from node_lib import *
