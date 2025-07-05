@@ -1,5 +1,4 @@
 # Visualize node graph
-# Copyright 2013 Victor Lavrentev
 
 import matplotlib.pyplot as plt
 import json, sys
